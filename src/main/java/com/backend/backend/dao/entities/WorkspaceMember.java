@@ -31,11 +31,9 @@ public class WorkspaceMember {
     @Column(nullable = false, updatable = false)
     private String id;
 
-    @Column(nullable = false)
-    private String userId;
+//    @Column(nullable = false)
+//    private String userId;
 
-    @Column(nullable = false)
-    private String workspaceId;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -44,11 +42,11 @@ public class WorkspaceMember {
     @Column(nullable = false)
     private LocalDateTime joinedAt;
 
-    // @ManyToOne(fetch = FetchType.LAZY)
-    // @JoinColumn(name = "user_id", insertable = false, updatable = false)
-    // private User user;
+     @ManyToOne(fetch = FetchType.LAZY)
+     @JoinColumn(name = "user_id",nullable = false)
+     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "workspace_id", insertable = false, updatable = false)
+    @JoinColumn(name = "workspace_id",nullable = false)
     private Workspace workspace;
 }

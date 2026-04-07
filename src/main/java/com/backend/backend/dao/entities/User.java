@@ -10,6 +10,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.UuidGenerator;
 // import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDateTime;
@@ -19,12 +20,12 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "users")
+@Table(name = "app_users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // @UuidGenerator
+    @UuidGenerator
     @Column(nullable = false, updatable = false)
     private String id;
 
