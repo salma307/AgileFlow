@@ -1,5 +1,7 @@
 package com.backend.backend.dao.entities;
 
+import com.backend.backend.dao.enums.Priority;
+import com.backend.backend.dao.enums.TaskStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

@@ -1,4 +1,4 @@
-package com.backend.backend.dao.entities;
+package com.backend.backend.dao.enums;
 
 public enum ListType {
     SPRINT,

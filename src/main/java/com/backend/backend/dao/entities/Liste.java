@@ -1,5 +1,6 @@
 package com.backend.backend.dao.entities;
 
+import com.backend.backend.dao.enums.ListType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
