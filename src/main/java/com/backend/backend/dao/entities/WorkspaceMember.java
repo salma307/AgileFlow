@@ -43,9 +43,9 @@ public class WorkspaceMember {
     @Column(nullable = false)
     private LocalDateTime joinedAt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", insertable = false, updatable = false)
-    private User user;
+    // @ManyToOne(fetch = FetchType.LAZY)
+    // @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    // private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "workspace_id", insertable = false, updatable = false)

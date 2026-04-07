@@ -26,7 +26,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "task")
-public class Task {
+public class  Task {
 
     @Id
     @GeneratedValue

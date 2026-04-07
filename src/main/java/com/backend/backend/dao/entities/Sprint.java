@@ -42,5 +42,5 @@ public class Sprint {
     private boolean isActive;
 
     @OneToMany(mappedBy = "sprint")
-    private List<Task> tasks;
+    private List<Liste> listes;
 }

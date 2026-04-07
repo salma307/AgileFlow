@@ -45,9 +45,14 @@ public class Liste {
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "folder_id", nullable = false)
     private Folder folder;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sprint_id")
+    private Sprint sprint;
 
     @OneToMany(mappedBy = "liste")
     private List<Task> tasks;
