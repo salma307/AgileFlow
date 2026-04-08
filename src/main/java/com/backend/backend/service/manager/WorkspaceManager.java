@@ -4,9 +4,9 @@ import com.backend.backend.dao.entities.Workspace;
 import com.backend.backend.dao.repositories.WorkspaceRepository;
 import com.backend.backend.dto.space.SpaceDto;
 import com.backend.backend.dto.workspace.WorkspaceDto;
-import com.backend.backend.dto.workspace.WorkspaceResponseDto;
 import com.backend.backend.dto.workspace.WorkspaceRequestDto;
-import com.backend.backend.dto.workspaceMember.WorkspaceMemberDTO;
+import com.backend.backend.dto.workspace.WorkspaceResponseDto;
+import com.backend.backend.dto.workspaceMember.WorkspaceMemberDto;
 import com.backend.backend.mapper.WorkspaceMapper;
 import com.backend.backend.service.serviceInterface.IWorkspaceService;
 import lombok.RequiredArgsConstructor;
@@ -83,7 +83,7 @@ public class WorkspaceManager implements IWorkspaceService{
             if (w.getWorkspaceMembers() != null) {
                 dto.setWorkspaceMembers(w.getWorkspaceMembers().stream()
                         .map(m -> {
-                            WorkspaceMemberDTO wmDto = new WorkspaceMemberDTO();
+                            WorkspaceMemberDto wmDto = new WorkspaceMemberDto();
                             wmDto.setId(m.getId());
                             wmDto.setRole(m.getRole().name());
                             wmDto.setJoinedAt(m.getJoinedAt());

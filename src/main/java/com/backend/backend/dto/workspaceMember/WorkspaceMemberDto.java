@@ -5,7 +5,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class WorkspaceMemberDTO {
+public class WorkspaceMemberDto {
     private String id;
     private String role;
     private String userName;
