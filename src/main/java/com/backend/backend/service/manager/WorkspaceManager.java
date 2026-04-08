@@ -2,11 +2,11 @@ package com.backend.backend.service.manager;
 
 import com.backend.backend.dao.entities.Workspace;
 import com.backend.backend.dao.repositories.WorkspaceRepository;
-import com.backend.backend.dto.Space.SpaceDTO;
-import com.backend.backend.dto.Workspace.WorkspaceDTO;
-import com.backend.backend.dto.Workspace.WorkspaceResponseDTO;
-import com.backend.backend.dto.Workspace.WorkspaceRequestDTO;
-import com.backend.backend.dto.WorkspaceMember.WorkspaceMemberDTO;
+import com.backend.backend.dto.space.SpaceDto;
+import com.backend.backend.dto.workspace.WorkspaceDto;
+import com.backend.backend.dto.workspace.WorkspaceResponseDto;
+import com.backend.backend.dto.workspace.WorkspaceRequestDto;
+import com.backend.backend.dto.workspaceMember.WorkspaceMemberDTO;
 import com.backend.backend.mapper.WorkspaceMapper;
 import com.backend.backend.service.serviceInterface.IWorkspaceService;
 import lombok.RequiredArgsConstructor;
@@ -28,23 +28,23 @@ public class WorkspaceManager implements IWorkspaceService{
     private final ModelMapper modelMapper;
 
     @Override
-    public WorkspaceResponseDTO addWorkspace(WorkspaceRequestDTO workspaceRequestDTO) {
+    public WorkspaceResponseDto addWorkspace(WorkspaceRequestDto workspaceRequestDTO) {
         Workspace workspaceEntity = modelMapper.map(workspaceRequestDTO,Workspace.class);
         workspaceEntity.setCreatedAt(LocalDateTime.now());
         workspaceRepository.save(workspaceEntity);
-        WorkspaceResponseDTO workspaceResponseDTO = modelMapper.map(workspaceEntity,WorkspaceResponseDTO.class);
+        WorkspaceResponseDto workspaceResponseDTO = modelMapper.map(workspaceEntity, WorkspaceResponseDto.class);
         return workspaceResponseDTO;
     }
 
     @Override
-    public WorkspaceResponseDTO updateWorkspace(String id, WorkspaceRequestDTO workspaceRequestDTO) {
+    public WorkspaceResponseDto updateWorkspace(String id, WorkspaceRequestDto workspaceRequestDTO) {
 
         Workspace existingWorkspace = workspaceRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Workspace introuvable"));
 
         Workspace updatedEntity = workspaceRepository.save(existingWorkspace);
 
-        WorkspaceResponseDTO workspaceResponseDTO = modelMapper.map(updatedEntity,WorkspaceResponseDTO.class);
+        WorkspaceResponseDto workspaceResponseDTO = modelMapper.map(updatedEntity, WorkspaceResponseDto.class);
 
         return workspaceResponseDTO;
     }
@@ -55,7 +55,7 @@ public class WorkspaceManager implements IWorkspaceService{
     }
 
     @Override
-    public WorkspaceResponseDTO getWorkspaceById(String id) {
+    public WorkspaceResponseDto getWorkspaceById(String id) {
         Workspace workspace = workspaceRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Workspace introuvable"));
 
@@ -63,18 +63,18 @@ public class WorkspaceManager implements IWorkspaceService{
     }
 
     @Override
-    public List<WorkspaceResponseDTO> getAllWorkspace() {
+    public List<WorkspaceResponseDto> getAllWorkspace() {
         return workspaceRepository.findAll().stream()
                 .map(workspaceMapper::toDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Page<WorkspaceDTO> getAllWorkspaceSummaries(int page, int size) {
+    public Page<WorkspaceDto> getAllWorkspaceSummaries(int page, int size) {
         Page<Workspace> workspaces = workspaceRepository.findAllByOrderByIdDesc(PageRequest.of(page, size));
 
         return workspaces.map(w -> {
-            WorkspaceDTO dto = modelMapper.map(w, WorkspaceDTO.class);
+            WorkspaceDto dto = modelMapper.map(w, WorkspaceDto.class);
 
             if (w.getUser() != null) {
                 dto.setOwnerName(w.getUser().getName());
@@ -98,9 +98,9 @@ public class WorkspaceManager implements IWorkspaceService{
             if (w.getSpaces() != null) {
                 dto.setSpaces(w.getSpaces().stream()
                         .map(s -> {
-                            SpaceDTO sDto = new SpaceDTO();
+                            SpaceDto sDto = new SpaceDto();
                             sDto.setId(s.getId());
-                            sDto.setName(s.getName());
+                            sDto.setSpaceName(s.getName());
                             sDto.setColor(s.getColor());
                             sDto.setPrivate(s.isPrivate());
                             return sDto;

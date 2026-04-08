@@ -1,15 +1,13 @@
-package com.backend.backend.dto.Workspace;
+package com.backend.backend.dto.workspace;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class WorkspaceResponseDTO {
+public class WorkspaceResponseDto {
 
     private String id;
     private String name;

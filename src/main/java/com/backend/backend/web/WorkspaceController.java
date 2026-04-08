@@ -1,8 +1,8 @@
 package com.backend.backend.web;
 
-import com.backend.backend.dto.Workspace.WorkspaceDTO;
-import com.backend.backend.dto.Workspace.WorkspaceRequestDTO;
-import com.backend.backend.dto.Workspace.WorkspaceResponseDTO;
+import com.backend.backend.dto.workspace.WorkspaceDto;
+import com.backend.backend.dto.workspace.WorkspaceRequestDto;
+import com.backend.backend.dto.workspace.WorkspaceResponseDto;
 import com.backend.backend.service.manager.WorkspaceManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,15 +19,15 @@ public class WorkspaceController {
     private WorkspaceManager workspaceManager;
 
     @GetMapping
-    public Page<WorkspaceDTO> getWorkspaces(
+    public Page<WorkspaceDto> getWorkspaces(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
         return workspaceManager.getAllWorkspaceSummaries(page,size);
     }
 
     @PostMapping
-    public WorkspaceResponseDTO createNewCourse(@RequestBody WorkspaceRequestDTO body) {
-        WorkspaceResponseDTO responseDTO = workspaceManager.addWorkspace(body);
+    public WorkspaceResponseDto createNewCourse(@RequestBody WorkspaceRequestDto body) {
+        WorkspaceResponseDto responseDTO = workspaceManager.addWorkspace(body);
         return responseDTO;
     }
 
@@ -38,9 +38,9 @@ public class WorkspaceController {
     }
 
     @PutMapping("/{id}")
-    public WorkspaceResponseDTO updateWorkspace(
+    public WorkspaceResponseDto updateWorkspace(
             @PathVariable String id,
-            @RequestBody WorkspaceRequestDTO body) {
+            @RequestBody WorkspaceRequestDto body) {
         return workspaceManager.updateWorkspace(id, body);
     }
 

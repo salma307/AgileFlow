@@ -1,4 +1,4 @@
-package com.backend.backend.dto.WorkspaceMember;
+package com.backend.backend.dto.workspaceMember;
 
 import lombok.Data;
 
