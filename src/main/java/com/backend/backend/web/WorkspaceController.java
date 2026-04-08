@@ -31,9 +31,9 @@ public class WorkspaceController {
         return responseDTO;
     }
 
-    @DeleteMapping("{/id}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteWorkspace(@PathVariable String workspaceId){
+    public void deleteWorkspace(@PathVariable("id") String workspaceId){
         workspaceManager.deleteWorkspace(workspaceId);
     }
 
