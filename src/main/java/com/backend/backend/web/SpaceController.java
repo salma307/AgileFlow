@@ -1,6 +1,6 @@
 package com.backend.backend.web;
 
-import com.backend.backend.dto.SpaceDto;
+import com.backend.backend.dto.space.SpaceDto;
 import com.backend.backend.service.serviceInterface.ISpaceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

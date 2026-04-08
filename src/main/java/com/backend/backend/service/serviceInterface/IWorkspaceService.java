@@ -1,15 +1,18 @@
 package com.backend.backend.service.serviceInterface;
 
-import com.backend.backend.dao.entities.Workspace;
-import com.backend.backend.dto.WorkspaceDTO;
+import com.backend.backend.dto.workspace.WorkspaceDto;
+import com.backend.backend.dto.workspace.WorkspaceRequestDto;
+import com.backend.backend.dto.workspace.WorkspaceResponseDto;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 public interface IWorkspaceService {
-    public void addWorkspace(Workspace workspace);
-    public void updateWorkspace(Workspace workspace);
+    public WorkspaceResponseDto addWorkspace(WorkspaceRequestDto workspaceRequestDTO);
+    public WorkspaceResponseDto updateWorkspace(String id, WorkspaceRequestDto workspaceRequestDTO);
     public void deleteWorkspace(String workspaceId);
 
-    public WorkspaceDTO getWorkspaceById(String id);
-    public List<WorkspaceDTO> getAllWorkspace();
+    public WorkspaceResponseDto getWorkspaceById(String id);
+    public List<WorkspaceResponseDto> getAllWorkspace();
+    public Page<WorkspaceDto> getAllWorkspaceSummaries(int page, int size);
 }

@@ -1,6 +1,6 @@
 package com.backend.backend.service.serviceInterface;
 
-import com.backend.backend.dto.SpaceDto;
+import com.backend.backend.dto.space.SpaceDto;
 
 import java.util.List;
 

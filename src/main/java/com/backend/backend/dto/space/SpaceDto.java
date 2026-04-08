@@ -1,4 +1,4 @@
-package com.backend.backend.dto;
+package com.backend.backend.dto.space;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

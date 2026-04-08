@@ -4,7 +4,7 @@ import com.backend.backend.dao.entities.Space;
 import com.backend.backend.dao.entities.Workspace;
 import com.backend.backend.dao.repositories.SpaceRepository;
 import com.backend.backend.dao.repositories.WorkspaceRepository;
-import com.backend.backend.dto.SpaceDto;
+import com.backend.backend.dto.space.SpaceDto;
 import com.backend.backend.mapper.SpaceMapper;
 import com.backend.backend.service.serviceInterface.ISpaceService;
 import lombok.RequiredArgsConstructor;
