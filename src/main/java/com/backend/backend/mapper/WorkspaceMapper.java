@@ -1,7 +1,7 @@
 package com.backend.backend.mapper;
 
 import com.backend.backend.dao.entities.Workspace;
-import com.backend.backend.dto.Workspace.WorkspaceDTO;
+import com.backend.backend.dto.Workspace.WorkspaceResponseDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,13 +13,13 @@ public class WorkspaceMapper {
     private ModelMapper modelMapper;
 
     // Entity to DTO
-    public WorkspaceDTO toDto(Workspace workspace) {
+    public WorkspaceResponseDTO toDto(Workspace workspace) {
         if (workspace == null) return null;
-        return modelMapper.map(workspace, WorkspaceDTO.class);
+        return modelMapper.map(workspace, WorkspaceResponseDTO.class);
     }
 
     // DTO to Entity
-    public Workspace toEntity(WorkspaceDTO workspaceDTO) {
+    public Workspace toEntity(WorkspaceResponseDTO workspaceDTO) {
         if (workspaceDTO == null) return null;
         Workspace workspace = modelMapper.map(workspaceDTO, Workspace.class);
 
