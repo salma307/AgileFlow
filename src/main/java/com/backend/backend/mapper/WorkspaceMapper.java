@@ -1,7 +1,7 @@
 package com.backend.backend.mapper;
 
 import com.backend.backend.dao.entities.Workspace;
-import com.backend.backend.dto.Workspace.WorkspaceDTO;
+import com.backend.backend.dto.WorkspaceDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

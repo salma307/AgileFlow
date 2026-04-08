@@ -1,4 +1,4 @@
-package com.backend.backend.dto.Workspace;
+package com.backend.backend.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

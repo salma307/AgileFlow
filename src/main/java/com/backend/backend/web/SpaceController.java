@@ -1,10 +1,8 @@
 package com.backend.backend.web;
 
-import com.backend.backend.dao.entities.Space;
-import com.backend.backend.dto.Workspace.SpaceDto;
+import com.backend.backend.dto.SpaceDto;
 import com.backend.backend.service.serviceInterface.ISpaceService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

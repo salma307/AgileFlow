@@ -2,7 +2,7 @@ package com.backend.backend.service.manager;
 
 import com.backend.backend.dao.entities.Workspace;
 import com.backend.backend.dao.repositories.WorkspaceRepository;
-import com.backend.backend.dto.Workspace.WorkspaceDTO;
+import com.backend.backend.dto.WorkspaceDTO;
 import com.backend.backend.mapper.WorkspaceMapper;
 import com.backend.backend.service.serviceInterface.IWorkspaceService;
 import lombok.RequiredArgsConstructor;
