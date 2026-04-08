@@ -1,0 +1,15 @@
+### Récupérer tous les workspaces (Pagination)
+GET http://localhost:8080/api/workspaces
+Accept: application/json
+
+###
+POST http://localhost:8080/api/workspaces
+Content-Type: application/json
+
+{
+  "name": "Projet Maintenance",
+  "slug": "maintenance-2026"
+}
+
+###
+DELETE http://localhost:8080/api/workspaces/b7a8bcf7-fcb5-4df5-96a2-8fc15a91a55a
