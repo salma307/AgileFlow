@@ -2,9 +2,10 @@
 GET http://localhost:8080/api/workspaces
 Accept: application/json
 
-###
+### Créer un Workspace
 POST http://localhost:8080/api/workspaces
 Content-Type: application/json
+Authorization: Bearer "replace it by accessToken"
 
 {
   "name": "Projet Maintenance",

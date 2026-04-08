@@ -1,31 +1,33 @@
 package com.backend.backend.mapper;
 
+import com.backend.backend.dao.entities.User;
 import com.backend.backend.dao.entities.Workspace;
+import com.backend.backend.dao.repositories.UserRepository;
+import com.backend.backend.dto.workspace.WorkspaceRequestDto;
 import com.backend.backend.dto.workspace.WorkspaceResponseDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component
 
+@Component
 public class WorkspaceMapper {
+
     @Autowired
     private ModelMapper modelMapper;
 
-    // Entity to DTO
-    public WorkspaceResponseDto toDto(Workspace workspace) {
-        if (workspace == null) return null;
-        return modelMapper.map(workspace, WorkspaceResponseDto.class);
+    public Workspace requesttoEntity(WorkspaceRequestDto dto) {
+        if (dto == null) return null;
+        return modelMapper.map(dto, Workspace.class);
     }
 
-    // DTO to Entity
-    public Workspace toEntity(WorkspaceResponseDto workspaceDTO) {
-        if (workspaceDTO == null) return null;
-        Workspace workspace = modelMapper.map(workspaceDTO, Workspace.class);
+    public WorkspaceResponseDto toResponseDto(Workspace workspace) {
+        if (workspace == null) return null;
 
-        workspace.setSpaces(null);
-        workspace.setWorkspaceMembers(null);
+        WorkspaceResponseDto dto = modelMapper.map(workspace, WorkspaceResponseDto.class);
 
-        return workspace;
+        dto.setOwnerName(workspace.getUser().getName());
+
+        return dto;
     }
 }

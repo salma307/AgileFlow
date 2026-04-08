@@ -1,6 +1,8 @@
 package com.backend.backend.service.manager;
 
+import com.backend.backend.dao.entities.User;
 import com.backend.backend.dao.entities.Workspace;
+import com.backend.backend.dao.repositories.UserRepository;
 import com.backend.backend.dao.repositories.WorkspaceRepository;
 import com.backend.backend.dto.space.SpaceDto;
 import com.backend.backend.dto.workspace.WorkspaceDto;
@@ -13,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -26,14 +29,33 @@ public class WorkspaceManager implements IWorkspaceService{
     private final WorkspaceRepository workspaceRepository;
     private final WorkspaceMapper workspaceMapper;
     private final ModelMapper modelMapper;
+    private final UserRepository userRepository;
 
     @Override
     public WorkspaceResponseDto addWorkspace(WorkspaceRequestDto workspaceRequestDTO) {
-        Workspace workspaceEntity = modelMapper.map(workspaceRequestDTO,Workspace.class);
+        Workspace workspaceEntity = workspaceMapper.requesttoEntity(workspaceRequestDTO);
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String email;
+
+        if (principal instanceof String && !"anonymousUser".equals(principal)) {
+            email = (String) principal;
+
+            System.out.println(email);
+        } else {
+            throw new RuntimeException("Utilisateur non authentifié");
+        }
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+
+
+        workspaceEntity.setUser(user);
         workspaceEntity.setCreatedAt(LocalDateTime.now());
+
         workspaceRepository.save(workspaceEntity);
-        WorkspaceResponseDto workspaceResponseDTO = modelMapper.map(workspaceEntity, WorkspaceResponseDto.class);
-        return workspaceResponseDTO;
+        WorkspaceResponseDto workspaceResponseDto = workspaceMapper.toResponseDto(workspaceEntity);
+        return workspaceResponseDto;
     }
 
     @Override
@@ -59,13 +81,13 @@ public class WorkspaceManager implements IWorkspaceService{
         Workspace workspace = workspaceRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Workspace introuvable"));
 
-        return workspaceMapper.toDto(workspace);
+        return workspaceMapper.toResponseDto(workspace);
     }
 
     @Override
     public List<WorkspaceResponseDto> getAllWorkspace() {
         return workspaceRepository.findAll().stream()
-                .map(workspaceMapper::toDto)
+                .map(workspaceMapper::toResponseDto)
                 .collect(Collectors.toList());
     }
 
