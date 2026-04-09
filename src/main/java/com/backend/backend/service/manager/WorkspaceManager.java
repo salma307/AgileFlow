@@ -2,7 +2,7 @@ package com.backend.backend.service.manager;
 
 import com.backend.backend.dao.entities.Workspace;
 import com.backend.backend.dao.repositories.WorkspaceRepository;
-import com.backend.backend.dto.space.SpaceDto;
+import com.backend.backend.dto.space.SpaceResponseDto;
 import com.backend.backend.dto.workspace.WorkspaceDto;
 import com.backend.backend.dto.workspace.WorkspaceRequestDto;
 import com.backend.backend.dto.workspace.WorkspaceResponseDto;
@@ -98,7 +98,7 @@ public class WorkspaceManager implements IWorkspaceService{
             if (w.getSpaces() != null) {
                 dto.setSpaces(w.getSpaces().stream()
                         .map(s -> {
-                            SpaceDto sDto = new SpaceDto();
+                            SpaceResponseDto sDto = new SpaceResponseDto();
                             sDto.setId(s.getId());
                             sDto.setSpaceName(s.getName());
                             sDto.setColor(s.getColor());

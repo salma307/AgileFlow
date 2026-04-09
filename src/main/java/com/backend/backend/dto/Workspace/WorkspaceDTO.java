@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.backend.backend.dto.space.SpaceDto;
+import com.backend.backend.dto.space.SpaceResponseDto;
 import com.backend.backend.dto.workspaceMember.WorkspaceMemberDto;
 
 @Data
@@ -24,6 +24,6 @@ public class WorkspaceDto {
     private LocalDateTime createdAt;
 
     private List<WorkspaceMemberDto> workspaceMembers;
-    private List<SpaceDto> spaces;
+    private List<SpaceResponseDto> spaces;
 
 }
