@@ -17,7 +17,7 @@ public class SpaceMapper {
             return null;
         }
         SpaceResponseDto spaceDto = modelMapper.map(space, SpaceResponseDto.class);
-        spaceDto.setName(space.getName());
+        spaceDto.setSpaceName(space.getName());
         spaceDto.setWorkspaceid(space.getWorkspace().getId());
         spaceDto.setWorkspaceName(space.getWorkspace().getName());
         spaceDto.setAdminid(space.getUser().getId());
