@@ -8,26 +8,25 @@ GET http://localhost:8080/api/spaces/0e0ad931-c437-4798-9092-de9b837e1504
 ### Ajouter un space
 POST http://localhost:8080/api/spaces
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJmaXJzdE5hbWUiOiJBZG1pbiIsImxhc3ROYW1lIjoiU3lzdGVtIiwicm9sZSI6IkFETUlOIiwidG9rZW5UeXBlIjoiYWNjZXNzIiwidXNlcklkIjoiMzM4NjQ3MjctYjdhNi00NmJhLWExMDAtNzY3NWNlNjc5NjE3Iiwic3ViIjoiYWRtaW5AZW5zYW0tY2FzYS5tYSIsImlhdCI6MTc3NTY5MDQyNCwiZXhwIjoxNzc1NjkxMzI0fQ.XQ1OADIKpjlMxCXKlprBAeuiH3jNhkcv_pIS4jVQ_Gs
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJmaXJzdE5hbWUiOiJBZG1pbiIsImxhc3ROYW1lIjoiU3lzdGVtIiwicm9sZSI6IkFETUlOIiwidG9rZW5UeXBlIjoiYWNjZXNzIiwidXNlcklkIjoiMzM4NjQ3MjctYjdhNi00NmJhLWExMDAtNzY3NWNlNjc5NjE3Iiwic3ViIjoiYWRtaW5AZW5zYW0tY2FzYS5tYSIsImlhdCI6MTc3NTc1MDkyOCwiZXhwIjoxNzc1NzUxODI4fQ.ejojCIswrSm0u2LJxxpHSyymEMHz9LRGKsrndhEp2a8
 
 {
-  "name" : "Back-end",
-  "color": "red",
-  "workspaceid": "e3352baf-ae03-470e-a32d-e823c7857887",
+  "name" : "devops",
+  "color": "green",
+  "workspaceId": "e3352baf-ae03-470e-a32d-e823c7857887",
   "isPrivate": false
 }
 
 ### Modifier un Space
-PUT http://localhost:8080/api/spaces/0e0ad931-c437-4798-9092-de9b837e1504
+PUT http://localhost:8080/api/spaces/2431d58c-6d9c-463f-b414-665021567fd4
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJmaXJzdE5hbWUiOiJBZG1pbiIsImxhc3ROYW1lIjoiU3lzdGVtIiwicm9sZSI6IkFETUlOIiwidG9rZW5UeXBlIjoiYWNjZXNzIiwidXNlcklkIjoiMzM4NjQ3MjctYjdhNi00NmJhLWExMDAtNzY3NWNlNjc5NjE3Iiwic3ViIjoiYWRtaW5AZW5zYW0tY2FzYS5tYSIsImlhdCI6MTc3NTY5MjA1MywiZXhwIjoxNzc1NjkyOTUzfQ.4sNPB4YSWjCM6Sd3VAHQjEmonHJnOO2jXAVXUFdJBZg
 
 {
-  "name" : "Back-end",
-  "color": "blue",
+  "name" : "Bac-end",
+  "color": "black",
   "workspaceid": "e3352baf-ae03-470e-a32d-e823c7857887",
   "isPrivate": false
 }
 
 ### Delete space
-DELETE http://localhost:8080/api/spaces/0e0ad931-c437-4798-9092-de9b837e1504
+DELETE http://localhost:8080/api/spaces/2431d58c-6d9c-463f-b414-665021567fd4
