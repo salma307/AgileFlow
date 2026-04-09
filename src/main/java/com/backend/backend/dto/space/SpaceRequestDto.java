@@ -13,7 +13,5 @@ public class SpaceRequestDto {
 
     private String workspaceId;
 
-    private String userId;
 
-    private List<String> memberIds;
 }

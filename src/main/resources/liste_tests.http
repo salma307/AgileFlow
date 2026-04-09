@@ -1,0 +1,45 @@
+### Récupérer toutes les listes
+GET http://localhost:8080/api/listes
+Accept: application/json
+
+### Récupérer liste avec ID
+GET http://localhost:8080/api/listes/{{listeId}}
+Accept: application/json
+
+### Récupérer listes par folder
+GET http://localhost:8080/api/listes/folder/{{folderId}}
+Accept: application/json
+
+### Récupérer listes par sprint
+GET http://localhost:8080/api/listes/sprint/{{sprintId}}
+Accept: application/json
+
+### Ajouter une liste
+POST http://localhost:8080/api/listes
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJmaXJzdE5hbWUiOiJBZG1pbiIsImxhc3ROYW1lIjoiU3lzdGVtIiwicm9sZSI6IkFETUlOIiwidG9rZW5UeXBlIjoiYWNjZXNzIiwidXNlcklkIjoiMzM4NjQ3MjctYjdhNi00NmJhLWExMDAtNzY3NWNlNjc5NjE3Iiwic3ViIjoiYWRtaW5AZW5zYW0tY2FzYS5tYSIsImlhdCI6MTc3NTY5MDQyNCwiZXhwIjoxNzc1NjkxMzI0fQ.XQ1OADIKpjlMxCXKlprBAeuiH3jNhkcv_pIS4jVQ_Gs
+
+{
+  "name": "Sprint Liste 1",
+  "type": "FEATURE",
+  "order": 1,
+  "folderId": "{{folderId}}",
+  "sprintId": null
+}
+
+### Modifier une liste
+PUT http://localhost:8080/api/listes/{{listeId}}
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJmaXJzdE5hbWUiOiJBZG1pbiIsImxhc3ROYW1lIjoiU3lzdGVtIiwicm9sZSI6IkFETUlOIiwidG9rZW5UeXBlIjoiYWNjZXNzIiwidXNlcklkIjoiMzM4NjQ3MjctYjdhNi00NmJhLWExMDAtNzY3NWNlNjc5NjE3Iiwic3ViIjoiYWRtaW5AZW5zYW0tY2FzYS5tYSIsImlhdCI6MTc3NTY5MjA1MywiZXhwIjoxNzc1NjkyOTUzfQ.4sNPB4YSWjCM6Sd3VAHQjEmonHJnOO2jXAVXUFdJBZg
+
+{
+  "name": "Sprint Liste 1 Updated",
+  "type": "PHASE",
+  "order": 2,
+  "folderId": "{{folderId}}",
+  "sprintId": null
+}
+
+### Supprimer une liste
+DELETE http://localhost:8080/api/listes/{{listeId}}
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJmaXJzdE5hbWUiOiJBZG1pbiIsImxhc3ROYW1lIjoiU3lzdGVtIiwicm9sZSI6IkFETUlOIiwidG9rZW5UeXBlIjoiYWNjZXNzIiwidXNlcklkIjoiMzM4NjQ3MjctYjdhNi00NmJhLWExMDAtNzY3NWNlNjc5NjE3Iiwic3ViIjoiYWRtaW5AZW5zYW0tY2FzYS5tYSIsImlhdCI6MTc3NTY5MjA1MywiZXhwIjoxNzc1NjkyOTUzfQ.4sNPB4YSWjCM6Sd3VAHQjEmonHJnOO2jXAVXUFdJBZg

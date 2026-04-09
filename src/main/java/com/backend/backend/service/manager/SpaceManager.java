@@ -30,11 +30,17 @@ public class SpaceManager implements ISpaceService {
 
     @Override
     public SpaceResponseDto addSpace(SpaceRequestDto spaceDto) {
+
+        if (spaceDto.getWorkspaceId() == null) {
+            throw new IllegalArgumentException("workspaceId is required");
+        }
+
         Space space = spaceMapper.toEntity(spaceDto);
+
         Workspace workspace=workspaceRepository.findById(spaceDto.getWorkspaceId()).orElseThrow(()->new IllegalArgumentException("Workspace not found"));
         space.setWorkspace(workspace);
-        User user=userRepository.findById(spaceDto.getUserId()).orElseThrow(()->new IllegalArgumentException("User not found"));
-        space.setUser(user);
+
+
         Space savedSpace = spaceRepository.save(space);
         return spaceMapper.toDto(savedSpace);
 

@@ -3,7 +3,7 @@ package com.backend.backend.web;
 import com.backend.backend.dto.workspace.WorkspaceDto;
 import com.backend.backend.dto.workspace.WorkspaceRequestDto;
 import com.backend.backend.dto.workspace.WorkspaceResponseDto;
-import com.backend.backend.service.manager.WorkspaceManager;
+import com.backend.backend.service.serviceInterface.IWorkspaceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,30 +18,30 @@ import java.util.List;
 public class WorkspaceController {
 
     @Autowired
-    private WorkspaceManager workspaceManager;
+    private IWorkspaceService workspaceService;
 
     @GetMapping
     public List<WorkspaceResponseDto> getWorkspaces() {
-        return workspaceManager.getAllWorkspace();
+        return workspaceService.getAllWorkspace();
     }
 
     @PostMapping
     public WorkspaceResponseDto createNewCourse(@RequestBody WorkspaceRequestDto body) {
-        WorkspaceResponseDto responseDTO = workspaceManager.addWorkspace(body);
+        WorkspaceResponseDto responseDTO = workspaceService.addWorkspace(body);
         return responseDTO;
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteWorkspace(@PathVariable String id){
-        workspaceManager.deleteWorkspace(id);
+        workspaceService.deleteWorkspace(id);
     }
 
     @PutMapping("/{id}")
     public WorkspaceResponseDto updateWorkspace(
             @PathVariable String id,
             @RequestBody WorkspaceRequestDto body) {
-        return workspaceManager.updateWorkspace(id, body);
+        return workspaceService.updateWorkspace(id, body);
     }
 
 
