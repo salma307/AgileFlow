@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class SpaceDto {
     private String id;
-    private String spaceName;
+    private String name;
     private String color;
     private boolean isPrivate;
 

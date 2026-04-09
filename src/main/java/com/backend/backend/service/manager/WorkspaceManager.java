@@ -64,9 +64,10 @@ public class WorkspaceManager implements IWorkspaceService{
         Workspace existingWorkspace = workspaceRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Workspace introuvable"));
 
-        Workspace updatedEntity = workspaceRepository.save(existingWorkspace);
-
-        WorkspaceResponseDto workspaceResponseDTO = modelMapper.map(updatedEntity, WorkspaceResponseDto.class);
+        existingWorkspace.setName(workspaceRequestDTO.getName());
+        existingWorkspace.setSlug(workspaceRequestDTO.getSlug());
+        Workspace updatedWorkspace = workspaceRepository.save(existingWorkspace);
+        WorkspaceResponseDto workspaceResponseDTO = workspaceMapper.toResponseDto(updatedWorkspace);
 
         return workspaceResponseDTO;
     }
@@ -122,7 +123,7 @@ public class WorkspaceManager implements IWorkspaceService{
                         .map(s -> {
                             SpaceDto sDto = new SpaceDto();
                             sDto.setId(s.getId());
-                            sDto.setSpaceName(s.getName());
+                            sDto.setName(s.getName());
                             sDto.setColor(s.getColor());
                             sDto.setPrivate(s.isPrivate());
                             return sDto;

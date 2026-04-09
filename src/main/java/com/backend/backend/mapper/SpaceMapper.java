@@ -16,7 +16,7 @@ public class SpaceMapper {
             return null;
         }
         SpaceDto spaceDto = modelMapper.map(space, SpaceDto.class);
-        spaceDto.setSpaceName(space.getName());
+        spaceDto.setName(space.getName());
         spaceDto.setWorkspaceid(space.getWorkspace().getId());
         spaceDto.setWorkspaceName(space.getWorkspace().getName());
         return spaceDto;
@@ -27,7 +27,8 @@ public class SpaceMapper {
             return null;
         }
         Space space = modelMapper.map(spaceDto, Space.class);
-        space.setName(spaceDto.getSpaceName());
+        space.setName(spaceDto.getName());
+
         space.setFolders(null);
         space.setWorkspace(null);
         return space;

@@ -9,6 +9,7 @@ import com.backend.backend.mapper.SpaceMapper;
 import com.backend.backend.service.serviceInterface.ISpaceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,7 +35,7 @@ public class SpaceManager implements ISpaceService {
     @Override
     public SpaceDto updateSpace(SpaceDto spaceDto) {
         Space space=spaceRepository.findById(spaceDto.getId()).orElseThrow(()->new IllegalArgumentException("Space not found"));
-        space.setName(spaceDto.getSpaceName());
+        space.setName(spaceDto.getName());
         space.setColor(spaceDto.getColor());
         space.setPrivate(spaceDto.isPrivate());
         if(spaceDto.getWorkspaceid()!=null){
@@ -46,13 +47,17 @@ public class SpaceManager implements ISpaceService {
     }
 
     @Override
+    @Transactional
     public boolean deleteSpace(String id) {
-        if(id==null){
+        if (id == null) {
             return false;
         }
+
         spaceRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Space not found"));
+
         spaceRepository.deleteById(id);
+
         return true;
     }
 
