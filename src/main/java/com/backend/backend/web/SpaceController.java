@@ -1,11 +1,18 @@
 package com.backend.backend.web;
 
-import com.backend.backend.dto.space.SpaceDto;
+import com.backend.backend.dto.space.SpaceRequestDto;
+import com.backend.backend.dto.space.SpaceResponseDto;
 import com.backend.backend.service.serviceInterface.ISpaceService;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
@@ -17,15 +24,14 @@ public class SpaceController {
     private final ISpaceService spaceService;
 
     @PostMapping
-    public ResponseEntity<SpaceDto> addSpace(@RequestBody SpaceDto spaceDto) {
-        SpaceDto spaceDto1 = spaceService.addSpace(spaceDto);
+    public ResponseEntity<SpaceResponseDto> addSpace(@RequestBody SpaceRequestDto spaceDto) {
+        SpaceResponseDto spaceDto1 = spaceService.addSpace(spaceDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(spaceDto1);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<SpaceDto> updateSpace(@PathVariable String id, @RequestBody SpaceDto spaceDto) {
-        spaceDto.setId(id);
-        SpaceDto updated = spaceService.updateSpace(spaceDto);
+    public ResponseEntity<SpaceResponseDto> updateSpace(@PathVariable String id, @RequestBody SpaceRequestDto spaceDto) {
+        SpaceResponseDto updated = spaceService.updateSpace(id,spaceDto);
         return ResponseEntity.ok(updated);
     }
 
@@ -36,20 +42,23 @@ public class SpaceController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SpaceDto> getSpaceById(@PathVariable String id) {
-        SpaceDto space = spaceService.getSpaceByid(id);
+    public ResponseEntity<SpaceResponseDto> getSpaceById(@PathVariable String id) {
+        SpaceResponseDto space = spaceService.getSpaceByid(id);
         return ResponseEntity.ok(space);
     }
 
     @GetMapping
-    public ResponseEntity<List<SpaceDto>> getAllSpaces() {
-        List<SpaceDto> spaces = spaceService.getSpaces();
-        return ResponseEntity.ok(spaces);
+    public ResponseEntity<Page<SpaceResponseDto>> getAllSpaces(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "name") String sortBy) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
+        return ResponseEntity.ok(spaceService.getSpaces(pageable));
     }
 
     @GetMapping("/workspace/{workspaceId}")
-    public ResponseEntity<List<SpaceDto>> getSpacesByWorkspace(@PathVariable String workspaceId) {
-        List<SpaceDto> spaces = spaceService.getSpaceByWorkspace(workspaceId);
+    public ResponseEntity<List<SpaceResponseDto>> getSpacesByWorkspace(@PathVariable String workspaceId) {
+        List<SpaceResponseDto> spaces = spaceService.getSpaceByWorkspace(workspaceId);
         return ResponseEntity.ok(spaces);
     }
 }
