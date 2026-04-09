@@ -1,17 +1,20 @@
 package com.backend.backend.service.serviceInterface;
 
-import com.backend.backend.dto.space.SpaceDto;
+import com.backend.backend.dto.space.SpaceRequestDto;
+import com.backend.backend.dto.space.SpaceResponseDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 
 import java.util.List;
 
 public interface ISpaceService {
-    public SpaceDto addSpace(SpaceDto spaceDto);
-    public SpaceDto updateSpace(SpaceDto spaceDto);
+    public SpaceResponseDto addSpace(SpaceRequestDto spaceDto);
+    public SpaceResponseDto updateSpace(String id,SpaceRequestDto spaceDto);
     public boolean deleteSpace(String id);
 
-    public SpaceDto getSpaceByid(String spaceId);
-    public List<SpaceDto> getSpaces();
-
-    public List<SpaceDto> getSpaceByWorkspace(String workspaceid);
+    public SpaceResponseDto getSpaceByid(String spaceId);
+    Page<SpaceResponseDto> getSpaces(Pageable pageable);
+    public List<SpaceResponseDto> getSpaceByWorkspace(String workspaceid);
 
 }
