@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class SpaceResponseDto {
     private String id;
-    private String spaceName;
+    private String name;
     private String color;
     private boolean isPrivate;
 
