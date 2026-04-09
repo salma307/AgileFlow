@@ -1,0 +1,74 @@
+### Variables globales
+@baseUrl = http://localhost:8080/api
+@adminEmail = admin@ensam-casa.ma
+@adminPassword = admin1234
+
+### 1. Login (Compte seedé)
+#@name login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "{{adminEmail}}",
+  "password": "{{adminPassword}}"
+}
+
+### Récupère l'accessToken ici pour les tests suivants
+@token = {{login.response.body.accessToken}}
+@refreshToken = {{login.response.body.refreshToken}}
+
+
+
+
+### 2. Register (Nouvel utilisateur)
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "firstName": "Ilyass",
+  "lastName": "Test",
+  "email": "Ilyass.test@ensam-casa.ma",
+  "password": "test1234",
+  "role": "OWNER"
+}
+
+
+### 3. Register avec email déjà existant (Attendu : 409 Conflict)
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "firstName": "Admin",
+  "lastName": "System",
+  "email": "{{adminEmail}}",
+  "password": "{{adminPassword}}",
+  "role": "ADMIN"
+}
+
+
+### 4. Refresh token
+POST {{baseUrl}}/auth/refresh
+Content-Type: application/json
+
+{
+  "refreshToken": "{{refreshToken}}"
+}
+
+
+### 5. Endpoint protégé SANS token (Attendu : 401 Unauthorized)
+GET {{baseUrl}}/workspaces
+
+
+### 6. Endpoint protégé AVEC token
+GET {{baseUrl}}/workspaces
+Authorization: Bearer {{token}}
+
+
+### 7. Login avec mauvais mot de passe (Attendu : 401 Unauthorized)
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "{{adminEmail}}",
+  "password": "wrongPassword"
+}

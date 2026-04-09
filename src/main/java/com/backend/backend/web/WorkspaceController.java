@@ -10,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/workspaces")
 @RequiredArgsConstructor
@@ -19,10 +21,8 @@ public class WorkspaceController {
     private WorkspaceManager workspaceManager;
 
     @GetMapping
-    public Page<WorkspaceDto> getWorkspaces(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
-        return workspaceManager.getAllWorkspaceSummaries(page,size);
+    public List<WorkspaceResponseDto> getWorkspaces() {
+        return workspaceManager.getAllWorkspace();
     }
 
     @PostMapping
@@ -33,8 +33,8 @@ public class WorkspaceController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteWorkspace(@PathVariable("id") String workspaceId){
-        workspaceManager.deleteWorkspace(workspaceId);
+    public void deleteWorkspace(@PathVariable String id){
+        workspaceManager.deleteWorkspace(id);
     }
 
     @PutMapping("/{id}")
