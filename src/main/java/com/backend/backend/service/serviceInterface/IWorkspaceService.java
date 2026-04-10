@@ -15,4 +15,5 @@ public interface IWorkspaceService {
     public WorkspaceResponseDto getWorkspaceById(String id);
     public List<WorkspaceResponseDto> getAllWorkspace();
     public Page<WorkspaceDto> getAllWorkspaceSummaries(int page, int size);
+    public List<WorkspaceResponseDto> getWorkspaceByCurrentUser();
 }

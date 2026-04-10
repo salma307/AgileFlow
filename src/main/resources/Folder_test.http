@@ -1,0 +1,33 @@
+### Get the folder by id
+GET http://localhost:8080/api/folders/3e16cb2e-76a8-44a9-bdfe-b96f6256de96
+Accept: application/json
+
+
+
+### Modifier un folder
+PUT http://localhost:8080/api/folders/3e16cb2e-76a8-44a9-bdfe-b96f6256de96
+Content-Type: application/json
+
+{
+  "hidden": true,
+  "name": "Cours IT",
+  "spaceId": "7f36095c-4ab4-4d6a-874c-04242f00b1f7"
+}
+
+### Delete workspace
+DELETE http://localhost:8080/api/folders/3e16cb2e-76a8-44a9-bdfe-b96f6256de96
+
+
+### Get all folders
+GET http://localhost:8080/api/folders
+
+
+### Ajouter un folder
+POST http://localhost:8080/api/folders
+Content-Type: application/json
+
+{
+  "hidden": false,
+  "name": "Cours Ilyass",
+  "spaceId": "7f36095c-4ab4-4d6a-874c-04242f00b1f7"
+}

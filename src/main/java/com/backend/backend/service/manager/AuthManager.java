@@ -12,6 +12,7 @@ import com.backend.backend.service.security.JwtService;
 import com.backend.backend.service.serviceInterface.IAuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -56,6 +57,24 @@ public class AuthManager implements IAuthService {
 
         User savedUser = userRepository.save(user);
         return buildAuthResponse(savedUser);
+    }
+
+    @Override
+    public User getCurrentUser() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String email;
+
+        if (principal instanceof String && !"anonymousUser".equals(principal)) {
+            email = (String) principal;
+
+            System.out.println(email);
+        } else {
+            throw new RuntimeException("Utilisateur non authentifié");
+        }
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        return user;
     }
 
     @Override
