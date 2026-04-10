@@ -1,14 +1,7 @@
 package com.backend.backend;
 
-import com.backend.backend.dao.entities.Folder;
-import com.backend.backend.dao.entities.Space;
-import com.backend.backend.dao.entities.User;
-import com.backend.backend.dao.entities.Workspace;
-import com.backend.backend.dao.repositories.FolderRepository;
-import com.backend.backend.dao.repositories.SpaceRepository;
-import com.backend.backend.dao.repositories.UserRepository;
-import com.backend.backend.dao.repositories.WorkspaceRepository;
-import com.backend.backend.dto.folder.FolderResponseDto;
+import com.backend.backend.dao.entities.*;
+import com.backend.backend.dao.repositories.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,99 +13,89 @@ import java.time.LocalDateTime;
 @SpringBootApplication
 public class BackendApplication {
 
-	private final WorkspaceRepository workspaceRepository;
-	private UserRepository userRepository;
-	private PasswordEncoder passwordEncoder;
-
-	public BackendApplication(WorkspaceRepository workspaceRepository) {
-		this.workspaceRepository = workspaceRepository;
-	}
-
 	public static void main(String[] args) {
 		SpringApplication.run(BackendApplication.class, args);
 	}
 
 	@Bean
 	CommandLineRunner start(UserRepository userRepository,
-	                        PasswordEncoder passwordEncoder, FolderRepository folderRepository, SpaceRepository spaceRepository) {
+	                        WorkspaceRepository workspaceRepository,
+	                        SpaceRepository spaceRepository,
+	                        FolderRepository folderRepository,
+	                        PasswordEncoder passwordEncoder) {
 		return args -> {
-			createUserIfMissing(userRepository, passwordEncoder,
+			// 1. Créer les utilisateurs
+			User admin = createUserIfMissing(userRepository, passwordEncoder,
 					"admin@ensam-casa.ma", "Admin", "System", "ADMIN", "admin1234");
+
 			createUserIfMissing(userRepository, passwordEncoder,
 					"prof@ensam-casa.ma", "Prof", "Demo", "USER", "prof1234");
-			createUserIfMissing(userRepository, passwordEncoder,
-					"student@ensam-casa.ma", "Student", "Demo", "USER", "student1234");
-//			createFolderIfMissing(folderRepository,spaceRepository,userRepository,"CRUD",false);
-			System.out.println("[DataSeed] Vérification des 3 users de base terminée.");
+
+			// 2. Créer un Workspace pour l'admin
+			Workspace defaultWorkspace = createWorkspaceIfMissing(workspaceRepository, admin,
+					"Mon Workspace Admin", "admin-workspace");
+
+			// 3. Créer un Space dans ce Workspace
+			Space mainSpace = createSpaceIfMissing(spaceRepository, defaultWorkspace,
+					"Projets 2026", false);
+
+			// 4. Créer un Folder dans ce Space
+			createFolderIfMissing(folderRepository, mainSpace, "Cours Maintenance", false);
+
+			System.out.println(">>> [DataSeed] Hiérarchie de test créée avec succès !");
 		};
 	}
 
+	// --- HELPER METHODS ---
 
-
-	private void createUserIfMissing(UserRepository userRepository,
-	                                 PasswordEncoder passwordEncoder,
-	                                 String email,
-	                                 String firstName,
-	                                 String lastName,
-	                                 String role,
-	                                 String rawPassword) {
-		if (userRepository.existsByEmail(email)) {
-			return;
-		}
-
-		User user = new User();
-		user.setEmail(email);
-		user.setFirstName(firstName);
-		user.setLastName(lastName);
-		user.setName(firstName + " " + lastName);
-		user.setRole(role);
-		user.setPassword(passwordEncoder.encode(rawPassword));
-		user.setCreatedAt(LocalDateTime.now());
-		userRepository.save(user);
+	private User createUserIfMissing(UserRepository repo, PasswordEncoder encoder, String email,
+	                                 String fName, String lName, String role, String pass) {
+		return repo.findByEmail(email).orElseGet(() -> {
+			User user = new User();
+			user.setEmail(email);
+			user.setFirstName(fName);
+			user.setLastName(lName);
+			user.setName(fName + " " + lName);
+			user.setRole(role);
+			user.setPassword(encoder.encode(pass));
+			user.setCreatedAt(LocalDateTime.now());
+			System.out.println("Seed: Utilisateur créé -> " + email);
+			return repo.save(user);
+		});
 	}
-//	private void createFolderIfMissing(FolderRepository folderRepository,
-//	                                   SpaceRepository spaceRepository,
-//									   UserRepository userRepository,
-//	                                   String folderName,
-//	                                   boolean isHidden) {
-//
-//		User user = userRepository.findByName("admin")
-//				.orElseGet(() -> {
-//					User s = new User();
-//					s.setEmail("admin@ensam-casa.ma");
-//					s.setFirstName("Admin");
-//					s.setLastName("System");
-//					s.setName("ADMIN");
-//					s.setPassword("admin1234");
-//
-//					return userRepository.save(s);
-//				});
-//
-//		Workspace workspace = workspaceRepository.findByName("DefaultWorkspace")
-//				.orElseGet(() -> {
-//					Workspace s = new Workspace();
-//					s.setName("DefaultWorkspace");
-//					s.setSlug("DefaultSlug");
-//					s.setCreatedAt(LocalDateTime.now());
-//					s.setUser(user);
-//
-//				return workspaceRepository.save(s);
-//				});
-//		// Récupère un space existant ou crée-en un
-//		Space space = spaceRepository.findByName("DefaultSpace")
-//				.orElseGet(() -> {
-//					Space s = new Space();
-//					s.setName("DefaultSpace");
-//					s.setPrivate(false); // exemple
-//					s.setWorkspace(workspace); // si tu as besoin d'un workspace
-//					return spaceRepository.save(s);
-//				});
-//
-//		Folder folder = new Folder();
-//		folder.setName(folderName);
-//		folder.setHidden(isHidden);
-//		folder.setSpace(space);
-//
-//		folderRepository.save(folder);
-//	}
+
+	private Workspace createWorkspaceIfMissing(WorkspaceRepository repo, User owner, String name, String slug) {
+		return repo.findByName(name).orElseGet(() -> {
+			Workspace ws = new Workspace();
+			ws.setName(name);
+			ws.setSlug(slug);
+			ws.setUser(owner);
+			ws.setCreatedAt(LocalDateTime.now());
+			System.out.println("Seed: Workspace créé -> " + name);
+			return repo.save(ws);
+		});
+	}
+
+	private Space createSpaceIfMissing(SpaceRepository repo, Workspace ws, String name, boolean isPrivate) {
+		// On cherche par nom ET par workspace pour éviter les doublons
+		return repo.findByName(name).orElseGet(() -> {
+			Space space = new Space();
+			space.setName(name);
+			space.setPrivate(isPrivate);
+			space.setWorkspace(ws);
+			System.out.println("Seed: Space créé -> " + name);
+			return repo.save(space);
+		});
+	}
+
+	private void createFolderIfMissing(FolderRepository repo, Space space, String name, boolean isHidden) {
+		if (repo.findByName(name).isEmpty()) {
+			Folder folder = new Folder();
+			folder.setName(name);
+			folder.setHidden(isHidden);
+			folder.setSpace(space);
+			repo.save(folder);
+			System.out.println("Seed: Folder créé -> " + name);
+		}
+	}
 }

@@ -21,9 +21,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJmaXJzdE5hbWUiOiJBZG1pbiIsImxhc3ROY
 
 {
   "name": "Sprint Liste 1",
-  "type": "FEATURE",
+  "type": "SPRINT",
   "order": 1,
-  "folderId": "{{folderId}}",
+  "folderId": "3e16cb2e-76a8-44a9-bdfe-b96f6256de96",
   "sprintId": null
 }
 

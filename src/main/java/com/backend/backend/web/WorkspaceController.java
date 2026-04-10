@@ -20,10 +20,10 @@ public class WorkspaceController {
     @Autowired
     private IWorkspaceService workspaceService;
 
-    @GetMapping
-    public List<WorkspaceResponseDto> getWorkspaces() {
-        return workspaceService.getAllWorkspace();
-    }
+//    @GetMapping
+//    public List<WorkspaceResponseDto> getWorkspaces() {
+//        return workspaceService.getAllWorkspace();
+//    }
 
     @PostMapping
     public WorkspaceResponseDto createNewCourse(@RequestBody WorkspaceRequestDto body) {
@@ -42,6 +42,13 @@ public class WorkspaceController {
             @PathVariable String id,
             @RequestBody WorkspaceRequestDto body) {
         return workspaceService.updateWorkspace(id, body);
+    }
+
+    @GetMapping
+    public List<WorkspaceResponseDto> getWorkspaceByCurrentUser(){
+            List<WorkspaceResponseDto> workspacesResponseDto = workspaceService.getWorkspaceByCurrentUser();
+
+            return workspacesResponseDto;
     }
 
 
