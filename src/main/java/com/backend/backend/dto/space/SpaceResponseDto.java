@@ -21,7 +21,6 @@ public class SpaceResponseDto {
     private String workspaceName;
 
 
-    //private List<SpaceMemberDto> spaceMembers;
 
     //private List<FolderDto> folders;
 

@@ -3,43 +3,43 @@ GET http://localhost:8080/api/listes
 Accept: application/json
 
 ### Récupérer liste avec ID
-GET http://localhost:8080/api/listes/{{listeId}}
+GET http://localhost:8081/api/listes/eb596af5-0258-4850-9a16-3089884676ff
 Accept: application/json
 
 ### Récupérer listes par folder
-GET http://localhost:8080/api/listes/folder/{{folderId}}
+GET http://localhost:8081/api/listes/folder/e18b2b4d-68ce-4bb7-899e-9507a3d08798
 Accept: application/json
 
 ### Récupérer listes par sprint
-GET http://localhost:8080/api/listes/sprint/{{sprintId}}
+GET http://localhost:8081/api/listes/sprint/
 Accept: application/json
 
 ### Ajouter une liste
-POST http://localhost:8080/api/listes
+POST http://localhost:8081/api/listes
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJmaXJzdE5hbWUiOiJBZG1pbiIsImxhc3ROYW1lIjoiU3lzdGVtIiwicm9sZSI6IkFETUlOIiwidG9rZW5UeXBlIjoiYWNjZXNzIiwidXNlcklkIjoiMzM4NjQ3MjctYjdhNi00NmJhLWExMDAtNzY3NWNlNjc5NjE3Iiwic3ViIjoiYWRtaW5AZW5zYW0tY2FzYS5tYSIsImlhdCI6MTc3NTY5MDQyNCwiZXhwIjoxNzc1NjkxMzI0fQ.XQ1OADIKpjlMxCXKlprBAeuiH3jNhkcv_pIS4jVQ_Gs
 
 {
-  "name": "Sprint Liste 1",
-  "type": "FEATURE",
+  "name": "Sprint Liste 2",
+  "type": "PHASE",
   "order": 1,
-  "folderId": "{{folderId}}",
+  "folderId": "e18b2b4d-68ce-4bb7-899e-9507a3d08798",
   "sprintId": null
 }
 
 ### Modifier une liste
-PUT http://localhost:8080/api/listes/{{listeId}}
+PUT http://localhost:8081/api/listes/f95fdb6c-6ede-46a5-af79-0a0087d3b79a
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJmaXJzdE5hbWUiOiJBZG1pbiIsImxhc3ROYW1lIjoiU3lzdGVtIiwicm9sZSI6IkFETUlOIiwidG9rZW5UeXBlIjoiYWNjZXNzIiwidXNlcklkIjoiMzM4NjQ3MjctYjdhNi00NmJhLWExMDAtNzY3NWNlNjc5NjE3Iiwic3ViIjoiYWRtaW5AZW5zYW0tY2FzYS5tYSIsImlhdCI6MTc3NTY5MjA1MywiZXhwIjoxNzc1NjkyOTUzfQ.4sNPB4YSWjCM6Sd3VAHQjEmonHJnOO2jXAVXUFdJBZg
 
 {
-  "name": "Sprint Liste 1 Updated",
+  "name": "Sprint Liste 2",
   "type": "PHASE",
   "order": 2,
-  "folderId": "{{folderId}}",
+  "folderId": "e18b2b4d-68ce-4bb7-899e-9507a3d08798",
   "sprintId": null
 }
 
 ### Supprimer une liste
-DELETE http://localhost:8080/api/listes/{{listeId}}
+DELETE http://localhost:8081/api/listes/f95fdb6c-6ede-46a5-af79-0a0087d3b79a
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJmaXJzdE5hbWUiOiJBZG1pbiIsImxhc3ROYW1lIjoiU3lzdGVtIiwicm9sZSI6IkFETUlOIiwidG9rZW5UeXBlIjoiYWNjZXNzIiwidXNlcklkIjoiMzM4NjQ3MjctYjdhNi00NmJhLWExMDAtNzY3NWNlNjc5NjE3Iiwic3ViIjoiYWRtaW5AZW5zYW0tY2FzYS5tYSIsImlhdCI6MTc3NTY5MjA1MywiZXhwIjoxNzc1NjkyOTUzfQ.4sNPB4YSWjCM6Sd3VAHQjEmonHJnOO2jXAVXUFdJBZg
