@@ -56,6 +56,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/**", "/h2-console/**", "/error").permitAll()
                         .requestMatchers("/api/workspaces/**").permitAll()
                         .requestMatchers("/api/spaces/**").permitAll()
+                        .requestMatchers("/api/listes/**").permitAll()
+                        .requestMatchers("/api/folders/**").permitAll()
                         .anyRequest().authenticated())
                 .exceptionHandling(ex -> ex.authenticationEntryPoint((request, response, authException) -> {
                     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

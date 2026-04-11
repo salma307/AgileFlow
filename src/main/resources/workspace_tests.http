@@ -5,11 +5,12 @@ Accept: application/json
 ### Créer  un Workspace
 POST http://localhost:8080/api/workspaces
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJmaXJzdE5hbWUiOiJBZG1pbiIsImxhc3ROYW1lIjoiU3lzdGVtIiwicm9sZSI6IkFETUlOIiwidG9rZW5UeXBlIjoiYWNjZXNzIiwidXNlcklkIjoiMzM4NjQ3MjctYjdhNi00NmJhLWExMDAtNzY3NWNlNjc5NjE3Iiwic3ViIjoiYWRtaW5AZW5zYW0tY2FzYS5tYSIsImlhdCI6MTc3NTc1MDc4MCwiZXhwIjoxNzc1NzUxNjgwfQ.GJmoaJcKfJhjKsCvT2NB49R_2LcuWNYImDojMPiVmvI
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJmaXJzdE5hbWUiOiJBZG1pbiIsImxhc3ROYW1lIjoiU3lzdGVtIiwicm9sZSI6IkFETUlOIiwidG9rZW5UeXBlIjoiYWNjZXNzIiwidXNlcklkIjoiMzM4NjQ3MjctYjdhNi00NmJhLWExMDAtNzY3NWNlNjc5NjE3Iiwic3ViIjoiYWRtaW5AZW5zYW0tY2FzYS5tYSIsImlhdCI6MTc3NTc3NzE3MCwiZXhwIjoxNzc1Nzc4MDcwfQ.eNcA2bPgBbsaBTz8otB-3QSAbAa4X1pB9RnkpOr1K2s
+
 
 {
-  "name": "Projet Maintenance",
-  "slug": "maintenance-2026"
+  "name": "Projet IT",
+  "slug": "IT-2026"
 }
 
 ### Modifier un Workspace
@@ -22,5 +23,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJmaXJzdE5hbWUiOiJBZG1pbiIsImxhc3ROY
   "slug": "Electrique-2026"
 }
 
-###
+### Delete workspace
 DELETE http://localhost:8080/api/workspaces/3c0b5b33-99e7-4760-b881-b2d32e14204e
+
+### Get All workspaces By user
+GET http://localhost:8080/api/workspaces
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJmaXJzdE5hbWUiOiJBZG1pbiIsImxhc3ROYW1lIjoiU3lzdGVtIiwicm9sZSI6IkFETUlOIiwidG9rZW5UeXBlIjoiYWNjZXNzIiwidXNlcklkIjoiMzM4NjQ3MjctYjdhNi00NmJhLWExMDAtNzY3NWNlNjc5NjE3Iiwic3ViIjoiYWRtaW5AZW5zYW0tY2FzYS5tYSIsImlhdCI6MTc3NTc3ODMwNiwiZXhwIjoxNzc1Nzc5MjA2fQ.mSjKojRf_PNEarudhn2bZrPWWFzsuCb24tllTy9xDCU
+
