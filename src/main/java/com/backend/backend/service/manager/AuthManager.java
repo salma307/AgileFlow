@@ -11,7 +11,9 @@ import com.backend.backend.dto.auth.RegisterRequestDto;
 import com.backend.backend.dto.auth.TokenResponseDto;
 import com.backend.backend.service.security.JwtService;
 import com.backend.backend.service.serviceInterface.IAuthService;
+import com.backend.backend.service.serviceInterface.IEmailService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,6 +33,10 @@ public class AuthManager implements IAuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
+
+    // Injection Spring via interface pour decoupler AuthManager de l'implementation concrete.
+    @Autowired
+    private IEmailService emailService;
 
     // Nombre de minutes pendant lesquelles le code OTP reste valide.
     @Value("${mfa.otp.duration-minutes:5}")
@@ -255,9 +261,12 @@ public class AuthManager implements IAuthService {
                 mfaOtpDurationMinutes * 60_000
         );
 
-        // En dev, on affiche le OTP dans les logs pour tester rapidement.
-        // IMPORTANT: en production, envoyer ce code par email/SMS et ne jamais le logger.
-        System.out.println("[MFA OTP] user=" + user.getEmail() + " otp=" + otpCode);
+        // On envoie le OTP par email, comme dans le pattern Presence (service SMTP simple).
+        try {
+            emailService.sendOtpEmail(user.getEmail(), otpCode, mfaOtpDurationMinutes);
+        } catch (Exception ex) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Impossible d'envoyer le code OTP par email.");
+        }
 
         AuthResponseDto response = new AuthResponseDto();
         response.setAccessToken(null);
