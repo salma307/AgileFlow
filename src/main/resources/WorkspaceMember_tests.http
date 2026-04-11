@@ -1,0 +1,40 @@
+###
+GET http://localhost:8080/api/workspaceMembers/5332c8f9-3af2-4fa4-8ae3-488a783eb842
+Content-Type: application/json
+
+###
+GET http://localhost:8080/api/workspaceMembers/User/7febadcd-04ef-4060-8408-cf0a5555bcbd
+Content-Type: application/json
+
+###
+GET http://localhost:8080/api/workspaceMembers/workspace/9d2b70a0-3e8c-4b34-be61-661e803ee311
+Content-Type: application/json
+
+###
+POST http://localhost:8080/api/workspaceMembers
+Content-Type: application/json
+
+{
+  "userId":"05a06df9-d005-40dd-bd54-58078dc6a646",
+  "workspaceId":"9d2b70a0-3e8c-4b34-be61-661e803ee311",
+  "role": "ADMIN"
+
+}
+
+
+
+###
+PUT http://localhost:8080/api/workspaceMembers/6191a14a-af91-473b-8fc1-0af6cbc3f20e
+Content-Type: application/json
+
+{
+"role" : "OWNER"
+}
+
+### Delete workspace
+DELETE http://localhost:8080/api/workspaceMembers/5332c8f9-3af2-4fa4-8ae3-488a783eb842
+
+
+
+
+

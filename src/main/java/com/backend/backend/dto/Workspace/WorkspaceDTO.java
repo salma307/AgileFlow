@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.backend.backend.dto.space.SpaceResponseDto;
-import com.backend.backend.dto.workspaceMember.WorkspaceMemberDto;
+import com.backend.backend.dto.workspaceMember.WorkspaceMemberRequestDto;
 
 @Data
 @NoArgsConstructor
@@ -23,7 +23,7 @@ public class WorkspaceDto {
 
     private LocalDateTime createdAt;
 
-    private List<WorkspaceMemberDto> workspaceMembers;
+    private List<WorkspaceMemberRequestDto> workspaceMembers;
     private List<SpaceResponseDto> spaces;
 
 }

@@ -12,6 +12,7 @@ import com.backend.backend.service.serviceInterface.IFolderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,6 +28,8 @@ public class FolderManager implements IFolderService {
     @Override
     public FolderResponseDto addFolder(FolderRequestDto folderRequestDTO) {
         Folder folder = folderMapper.toEntity(folderRequestDTO);
+
+        folder.setCreatedAt(LocalDateTime.now());
 
         folderRepository.save(folder);
 
