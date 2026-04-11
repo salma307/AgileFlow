@@ -123,7 +123,7 @@ public class WorkspaceManager implements IWorkspaceService{
                         .map(s -> {
                             SpaceResponseDto sDto = new SpaceResponseDto();
                             sDto.setId(s.getId());
-                            sDto.setName(s.getName());
+                            sDto.setSpaceName(s.getName());
                             sDto.setColor(s.getColor());
                             sDto.setPrivate(s.isPrivate());
                             return sDto;

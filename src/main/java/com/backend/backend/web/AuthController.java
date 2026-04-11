@@ -2,6 +2,7 @@ package com.backend.backend.web;
 
 import com.backend.backend.dto.auth.AuthResponseDto;
 import com.backend.backend.dto.auth.LoginRequestDto;
+import com.backend.backend.dto.auth.MfaVerifyRequestDto;
 import com.backend.backend.dto.auth.RefreshTokenRequestDto;
 import com.backend.backend.dto.auth.RegisterRequestDto;
 import com.backend.backend.dto.auth.TokenResponseDto;
@@ -30,6 +31,12 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<AuthResponseDto> login(@RequestBody LoginRequestDto request) {
         AuthResponseDto response = authService.login(request);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/mfa/verify")
+    public ResponseEntity<AuthResponseDto> verifyMfa(@RequestBody MfaVerifyRequestDto request) {
+        AuthResponseDto response = authService.verifyMfa(request);
         return ResponseEntity.ok(response);
     }
 

@@ -20,21 +20,21 @@ public class SpaceMapper {
         spaceDto.setSpaceName(space.getName());
         spaceDto.setWorkspaceid(space.getWorkspace().getId());
         spaceDto.setWorkspaceName(space.getWorkspace().getName());
-        spaceDto.setAdminid(space.getUser().getId());
-        spaceDto.setAdminName(space.getUser().getName());
         return spaceDto;
     }
-
     public Space toEntity(SpaceRequestDto requestDto) {
-        if(requestDto==null){
+        if (requestDto == null) {
             return null;
         }
-        Space space = modelMapper.map(requestDto, Space.class);
+
+        Space space = new Space();
+
         space.setName(requestDto.getName());
-        space.setFolders(null);
-        space.setWorkspace(null);
-        space.setUser(null);
-        space.setSpaceMembers(null);
+
+        space.setColor(requestDto.getColor());
+
+        space.setPrivate(requestDto.isPrivate());
+
         return space;
     }
 }

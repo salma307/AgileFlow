@@ -13,15 +13,13 @@ import java.util.List;
 @AllArgsConstructor
 public class SpaceResponseDto {
     private String id;
-    private String name;
+    private String spaceName;
     private String color;
     private boolean isPrivate;
 
     private String workspaceid;
     private String workspaceName;
 
-    private String adminid;
-    private String adminName;
 
     //private List<SpaceMemberDto> spaceMembers;
 
