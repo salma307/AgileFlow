@@ -34,3 +34,8 @@ build/
 
 
 # src/main/resources/application.properties
+
+backend/data/*.db
+
+# Hide application properties file
+**/application.properties
