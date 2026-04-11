@@ -1,12 +1,8 @@
 package com.backend.backend.dto.space;
 
-import com.backend.backend.dao.entities.Folder;
-import com.backend.backend.dao.entities.SpaceMember;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -19,7 +15,6 @@ public class SpaceResponseDto {
 
     private String workspaceid;
     private String workspaceName;
-
 
 
     //private List<FolderDto> folders;

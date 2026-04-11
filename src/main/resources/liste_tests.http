@@ -3,19 +3,19 @@ GET http://localhost:8080/api/listes
 Accept: application/json
 
 ### Récupérer liste avec ID
-GET http://localhost:8081/api/listes/eb596af5-0258-4850-9a16-3089884676ff
+GET http://localhost:8080/api/listes/eb596af5-0258-4850-9a16-3089884676ff
 Accept: application/json
 
 ### Récupérer listes par folder
-GET http://localhost:8081/api/listes/folder/e18b2b4d-68ce-4bb7-899e-9507a3d08798
+GET http://localhost:8080/api/listes/folder/e18b2b4d-68ce-4bb7-899e-9507a3d08798
 Accept: application/json
 
 ### Récupérer listes par sprint
-GET http://localhost:8081/api/listes/sprint/
+GET http://localhost:8080/api/listes/sprint/
 Accept: application/json
 
 ### Ajouter une liste
-POST http://localhost:8081/api/listes
+POST http://localhost:8080/api/listes
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJmaXJzdE5hbWUiOiJBZG1pbiIsImxhc3ROYW1lIjoiU3lzdGVtIiwicm9sZSI6IkFETUlOIiwidG9rZW5UeXBlIjoiYWNjZXNzIiwidXNlcklkIjoiMzM4NjQ3MjctYjdhNi00NmJhLWExMDAtNzY3NWNlNjc5NjE3Iiwic3ViIjoiYWRtaW5AZW5zYW0tY2FzYS5tYSIsImlhdCI6MTc3NTY5MDQyNCwiZXhwIjoxNzc1NjkxMzI0fQ.XQ1OADIKpjlMxCXKlprBAeuiH3jNhkcv_pIS4jVQ_Gs
 
@@ -28,7 +28,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJmaXJzdE5hbWUiOiJBZG1pbiIsImxhc3ROY
 }
 
 ### Modifier une liste
-PUT http://localhost:8081/api/listes/f95fdb6c-6ede-46a5-af79-0a0087d3b79a
+PUT http://localhost:8080/api/listes/f95fdb6c-6ede-46a5-af79-0a0087d3b79a
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJmaXJzdE5hbWUiOiJBZG1pbiIsImxhc3ROYW1lIjoiU3lzdGVtIiwicm9sZSI6IkFETUlOIiwidG9rZW5UeXBlIjoiYWNjZXNzIiwidXNlcklkIjoiMzM4NjQ3MjctYjdhNi00NmJhLWExMDAtNzY3NWNlNjc5NjE3Iiwic3ViIjoiYWRtaW5AZW5zYW0tY2FzYS5tYSIsImlhdCI6MTc3NTY5MjA1MywiZXhwIjoxNzc1NjkyOTUzfQ.4sNPB4YSWjCM6Sd3VAHQjEmonHJnOO2jXAVXUFdJBZg
 
@@ -41,5 +41,5 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJmaXJzdE5hbWUiOiJBZG1pbiIsImxhc3ROY
 }
 
 ### Supprimer une liste
-DELETE http://localhost:8081/api/listes/f95fdb6c-6ede-46a5-af79-0a0087d3b79a
+DELETE http://localhost:8080/api/listes/f95fdb6c-6ede-46a5-af79-0a0087d3b79a
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJmaXJzdE5hbWUiOiJBZG1pbiIsImxhc3ROYW1lIjoiU3lzdGVtIiwicm9sZSI6IkFETUlOIiwidG9rZW5UeXBlIjoiYWNjZXNzIiwidXNlcklkIjoiMzM4NjQ3MjctYjdhNi00NmJhLWExMDAtNzY3NWNlNjc5NjE3Iiwic3ViIjoiYWRtaW5AZW5zYW0tY2FzYS5tYSIsImlhdCI6MTc3NTY5MjA1MywiZXhwIjoxNzc1NjkyOTUzfQ.4sNPB4YSWjCM6Sd3VAHQjEmonHJnOO2jXAVXUFdJBZg

@@ -54,8 +54,6 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<WorkspaceMember> workspaceMembers;
 
-    @OneToMany(mappedBy = "user")
-    private List<SpaceMember> spaceMembers;
 
     @OneToMany(mappedBy = "assignee")
     private List<Task> assignedTasks;
