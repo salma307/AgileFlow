@@ -10,6 +10,7 @@ import com.backend.backend.dto.workspace.WorkspaceRequestDto;
 import com.backend.backend.dto.workspace.WorkspaceResponseDto;
 import com.backend.backend.dto.workspaceMember.WorkspaceMemberDto;
 import com.backend.backend.mapper.WorkspaceMapper;
+import com.backend.backend.service.serviceInterface.IAuthService;
 import com.backend.backend.service.serviceInterface.IWorkspaceService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -20,37 +21,38 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class WorkspaceManager implements IWorkspaceService{
 
+
     private final WorkspaceRepository workspaceRepository;
     private final WorkspaceMapper workspaceMapper;
     private final ModelMapper modelMapper;
     private final UserRepository userRepository;
+    private final IAuthService authService;
+
+    @Override
+    public List<WorkspaceResponseDto> getWorkspaceByCurrentUser() {
+        User user = authService.getCurrentUser();
+
+        List<Workspace> workspaces = workspaceRepository.findAllByUser(user);
+
+        return workspaces.stream()
+                .map(workspaceMapper::toResponseDto)
+                .collect(Collectors.toList());
+    }
 
     @Override
     public WorkspaceResponseDto addWorkspace(WorkspaceRequestDto workspaceRequestDTO) {
         Workspace workspaceEntity = workspaceMapper.requesttoEntity(workspaceRequestDTO);
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String email;
-
-        if (principal instanceof String && !"anonymousUser".equals(principal)) {
-            email = (String) principal;
-
-            System.out.println(email);
-        } else {
-            throw new RuntimeException("Utilisateur non authentifié");
-        }
-
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-
-
+        User user = authService.getCurrentUser();
+        System.out.println(user);
         workspaceEntity.setUser(user);
+
         workspaceEntity.setCreatedAt(LocalDateTime.now());
 
         workspaceRepository.save(workspaceEntity);

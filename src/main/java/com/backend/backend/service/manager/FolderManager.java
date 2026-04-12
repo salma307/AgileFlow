@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -53,17 +54,22 @@ public class FolderManager implements IFolderService {
     }
 
     @Override
-    public void deleteFolder(String folderId) {
-
-    }
+    public void deleteFolder(String folderId) { folderRepository.deleteById(folderId);}
 
     @Override
     public FolderResponseDto getFolderById(String id) {
-        return null;
+        Folder folder = folderRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Folder introuvable"));
+
+        FolderResponseDto folderResponseDto = folderMapper.toResponseDto(folder);
+
+        return folderResponseDto;
     }
 
     @Override
     public List<FolderResponseDto> getAllFolder() {
-        return List.of();
+        return folderRepository.findAll().stream()
+                .map(folderMapper::toResponseDto)
+                .collect(Collectors.toList());
     }
 }

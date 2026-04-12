@@ -3,15 +3,15 @@ GET http://localhost:8080/api/listes
 Accept: application/json
 
 ### Récupérer liste avec ID
-GET http://localhost:8080/api/listes/eb596af5-0258-4850-9a16-3089884676ff
+GET http://localhost:8080/api/listes/{{listeId}}
 Accept: application/json
 
 ### Récupérer listes par folder
-GET http://localhost:8080/api/listes/folder/e18b2b4d-68ce-4bb7-899e-9507a3d08798
+GET http://localhost:8080/api/listes/folder/{{folderId}}
 Accept: application/json
 
 ### Récupérer listes par sprint
-GET http://localhost:8080/api/listes/sprint/
+GET http://localhost:8080/api/listes/sprint/{{sprintId}}
 Accept: application/json
 
 ### Ajouter une liste
@@ -20,26 +20,26 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJmaXJzdE5hbWUiOiJBZG1pbiIsImxhc3ROYW1lIjoiU3lzdGVtIiwicm9sZSI6IkFETUlOIiwidG9rZW5UeXBlIjoiYWNjZXNzIiwidXNlcklkIjoiMzM4NjQ3MjctYjdhNi00NmJhLWExMDAtNzY3NWNlNjc5NjE3Iiwic3ViIjoiYWRtaW5AZW5zYW0tY2FzYS5tYSIsImlhdCI6MTc3NTY5MDQyNCwiZXhwIjoxNzc1NjkxMzI0fQ.XQ1OADIKpjlMxCXKlprBAeuiH3jNhkcv_pIS4jVQ_Gs
 
 {
-  "name": "Sprint Liste 2",
-  "type": "PHASE",
+  "name": "Sprint Liste 1",
+  "type": "SPRINT",
   "order": 1,
-  "folderId": "e18b2b4d-68ce-4bb7-899e-9507a3d08798",
+  "folderId": "3e16cb2e-76a8-44a9-bdfe-b96f6256de96",
   "sprintId": null
 }
 
 ### Modifier une liste
-PUT http://localhost:8080/api/listes/f95fdb6c-6ede-46a5-af79-0a0087d3b79a
+PUT http://localhost:8080/api/listes/{{listeId}}
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJmaXJzdE5hbWUiOiJBZG1pbiIsImxhc3ROYW1lIjoiU3lzdGVtIiwicm9sZSI6IkFETUlOIiwidG9rZW5UeXBlIjoiYWNjZXNzIiwidXNlcklkIjoiMzM4NjQ3MjctYjdhNi00NmJhLWExMDAtNzY3NWNlNjc5NjE3Iiwic3ViIjoiYWRtaW5AZW5zYW0tY2FzYS5tYSIsImlhdCI6MTc3NTY5MjA1MywiZXhwIjoxNzc1NjkyOTUzfQ.4sNPB4YSWjCM6Sd3VAHQjEmonHJnOO2jXAVXUFdJBZg
 
 {
-  "name": "Sprint Liste 2",
+  "name": "Sprint Liste 1 Updated",
   "type": "PHASE",
   "order": 2,
-  "folderId": "e18b2b4d-68ce-4bb7-899e-9507a3d08798",
+  "folderId": "{{folderId}}",
   "sprintId": null
 }
 
 ### Supprimer une liste
-DELETE http://localhost:8080/api/listes/f95fdb6c-6ede-46a5-af79-0a0087d3b79a
+DELETE http://localhost:8080/api/listes/{{listeId}}
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJmaXJzdE5hbWUiOiJBZG1pbiIsImxhc3ROYW1lIjoiU3lzdGVtIiwicm9sZSI6IkFETUlOIiwidG9rZW5UeXBlIjoiYWNjZXNzIiwidXNlcklkIjoiMzM4NjQ3MjctYjdhNi00NmJhLWExMDAtNzY3NWNlNjc5NjE3Iiwic3ViIjoiYWRtaW5AZW5zYW0tY2FzYS5tYSIsImlhdCI6MTc3NTY5MjA1MywiZXhwIjoxNzc1NjkyOTUzfQ.4sNPB4YSWjCM6Sd3VAHQjEmonHJnOO2jXAVXUFdJBZg

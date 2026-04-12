@@ -36,12 +36,34 @@ public class JwtService {
         return generateToken(user, refreshDurationMs, "refresh");
     }
 
+    public String generateMfaChallengeToken(User user, String challengeId, long challengeDurationMs) {
+        Instant now = Instant.now();
+        Instant expiry = now.plusMillis(challengeDurationMs);
+
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("userId", user.getId());
+        claims.put("tokenType", "mfa_challenge");
+        claims.put("challengeId", challengeId);
+
+        return Jwts.builder()
+                .setClaims(claims)
+                .setSubject(user.getEmail())
+                .setIssuedAt(Date.from(now))
+                .setExpiration(Date.from(expiry))
+                .signWith(getSigningKey(), SignatureAlgorithm.HS256)
+                .compact();
+    }
+
     public boolean isValidAccessToken(String token) {
         return validateToken(token, "access");
     }
 
     public boolean isValidRefreshToken(String token) {
         return validateToken(token, "refresh");
+    }
+
+    public boolean isValidMfaChallengeToken(String token) {
+        return validateToken(token, "mfa_challenge");
     }
 
     public String extractSubject(String token) {
@@ -51,6 +73,11 @@ public class JwtService {
     public String extractRole(String token) {
         Object role = extractAllClaims(token).get("role");
         return role == null ? "USER" : role.toString();
+    }
+
+    public String extractChallengeId(String token) {
+        Object challengeId = extractAllClaims(token).get("challengeId");
+        return challengeId == null ? null : challengeId.toString();
     }
 
     private String generateToken(User user, long durationMs, String tokenType) {

@@ -46,6 +46,22 @@ public class User {
     @Column(nullable = false)
     private String role;
 
+    // Active ou desactive la MFA pour l'utilisateur.
+    @Column(nullable = false, columnDefinition = "boolean default false")
+    private Boolean mfaEnabled = false;
+
+    // Hash BCrypt du code OTP temporaire.
+    private String mfaOtpCodeHash;
+
+    // Date d'expiration du code OTP.
+    private LocalDateTime mfaOtpExpiresAt;
+
+    // Identifiant unique du challenge MFA en cours.
+    private String mfaChallengeId;
+
+    // Nombre de tentatives OTP ratees pour le challenge en cours.
+    private Integer mfaOtpAttempts;
+
     private String avatarUrl;
 
     @Column(nullable = false)
