@@ -94,6 +94,7 @@ public class BackendApplication {
 			folder.setName(name);
 			folder.setHidden(isHidden);
 			folder.setSpace(space);
+			folder.setCreatedAt(LocalDateTime.now());
 			repo.save(folder);
 			System.out.println("Seed: Folder créé -> " + name);
 		}

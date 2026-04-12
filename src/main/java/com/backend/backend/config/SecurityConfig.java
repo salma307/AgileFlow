@@ -58,6 +58,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/spaces/**").permitAll()
                         .requestMatchers("/api/listes/**").permitAll()
                         .requestMatchers("/api/folders/**").permitAll()
+                        .requestMatchers("/api/workspaceMembers/**").permitAll()
                         .anyRequest().authenticated())
                 .exceptionHandling(ex -> ex.authenticationEntryPoint((request, response, authException) -> {
                     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
