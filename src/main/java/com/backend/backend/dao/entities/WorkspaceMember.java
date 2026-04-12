@@ -1,29 +1,26 @@
 package com.backend.backend.dao.entities;
 
 import com.backend.backend.dao.enums.WorkspaceRole;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "workspace_member")
-public class WorkspaceMember {
+@Table(
+        name = "workspace_member",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "uk_user_workspace",
+                        columnNames = {"user_id", "workspace_id"}
+                )
+        }
+)public class WorkspaceMember {
 
     @Id
     @GeneratedValue
