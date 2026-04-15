@@ -89,14 +89,12 @@ public class AuthManager implements IAuthService {
 
         if (principal instanceof String && !"anonymousUser".equals(principal)) {
             email = (String) principal;
-
-            System.out.println(email);
         } else {
-            throw new RuntimeException("Utilisateur non authentifié");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Utilisateur non authentifié");
         }
 
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Utilisateur introuvable"));
         return user;
     }
 
