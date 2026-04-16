@@ -54,10 +54,11 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("/api/auth/**", "/h2-console/**", "/error").permitAll()
-                        .requestMatchers("/api/workspaces/**").permitAll()
-                        .requestMatchers("/api/spaces/**").permitAll()
-                        .requestMatchers("/api/listes/**").permitAll()
-                        .requestMatchers("/api/folders/**").permitAll()
+                        .requestMatchers("/api/workspaces/**").authenticated()
+                        .requestMatchers("/api/spaces/**").authenticated()
+                        .requestMatchers("/api/listes/**").authenticated()
+                        .requestMatchers("/api/folders/**").authenticated()
+                        .requestMatchers("/api/workspaceMembers/**").authenticated()
                         .anyRequest().authenticated())
                 .exceptionHandling(ex -> ex.authenticationEntryPoint((request, response, authException) -> {
                     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

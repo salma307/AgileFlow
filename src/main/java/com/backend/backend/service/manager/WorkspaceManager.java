@@ -8,7 +8,7 @@ import com.backend.backend.dto.space.SpaceResponseDto;
 import com.backend.backend.dto.workspace.WorkspaceDto;
 import com.backend.backend.dto.workspace.WorkspaceRequestDto;
 import com.backend.backend.dto.workspace.WorkspaceResponseDto;
-import com.backend.backend.dto.workspaceMember.WorkspaceMemberDto;
+import com.backend.backend.dto.workspaceMember.WorkspaceMemberRequestDto;
 import com.backend.backend.mapper.WorkspaceMapper;
 import com.backend.backend.service.serviceInterface.IAuthService;
 import com.backend.backend.service.serviceInterface.IWorkspaceService;
@@ -16,12 +16,10 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -93,46 +91,42 @@ public class WorkspaceManager implements IWorkspaceService{
                 .map(workspaceMapper::toResponseDto)
                 .collect(Collectors.toList());
     }
+//
+//    @Override
+//    public Page<WorkspaceDto> getAllWorkspaceSummaries(int page, int size) {
+//        Page<Workspace> workspaces = workspaceRepository.findAllByOrderByIdDesc(PageRequest.of(page, size));
+//        return workspaces.map(w -> {
+//            WorkspaceDto dto = modelMapper.map(w, WorkspaceDto.class);
+//
+//            if (w.getUser() != null) {
+//                dto.setOwnerName(w.getUser().getName());
+//            }
+//
+//            if (w.getWorkspaceMembers() != null) {
+//                dto.setWorkspaceMembers(w.getWorkspaceMembers().stream()
+//                        .map(m -> {
+//                            WorkspaceMemberRequestDto wmDto = new WorkspaceMemberRequestDto();
+//                            wmDto.setRole(m.getRole());
+//                            wmDto.setJoinedAt(m.getJoinedAt());
+//                            return wmDto;
+//                        }).toList());
+//            }
+//
+//            // 5. Mapping des Spaces
+//            if (w.getSpaces() != null) {
+//                dto.setSpaces(w.getSpaces().stream()
+//                        .map(s -> {
+//                            SpaceResponseDto sDto = new SpaceResponseDto();
+//                            sDto.setId(s.getId());
+//                            sDto.setSpaceName(s.getName());
+//                            sDto.setColor(s.getColor());
+//                            sDto.setPrivate(s.isPrivate());
+//                            return sDto;
+//                        }).toList());
+//            }
+//
+//            return dto;
+//        });
 
-    @Override
-    public Page<WorkspaceDto> getAllWorkspaceSummaries(int page, int size) {
-        Page<Workspace> workspaces = workspaceRepository.findAllByOrderByIdDesc(PageRequest.of(page, size));
-
-        return workspaces.map(w -> {
-            WorkspaceDto dto = modelMapper.map(w, WorkspaceDto.class);
-
-            if (w.getUser() != null) {
-                dto.setOwnerName(w.getUser().getName());
-            }
-
-            if (w.getWorkspaceMembers() != null) {
-                dto.setWorkspaceMembers(w.getWorkspaceMembers().stream()
-                        .map(m -> {
-                            WorkspaceMemberDto wmDto = new WorkspaceMemberDto();
-                            wmDto.setId(m.getId());
-                            wmDto.setRole(m.getRole().name());
-                            wmDto.setJoinedAt(m.getJoinedAt());
-                            if (m.getUser() != null) {
-                                wmDto.setUserName(m.getUser().getName());
-                            }
-                            return wmDto;
-                        }).toList());
-            }
-
-            // 5. Mapping des Spaces
-            if (w.getSpaces() != null) {
-                dto.setSpaces(w.getSpaces().stream()
-                        .map(s -> {
-                            SpaceResponseDto sDto = new SpaceResponseDto();
-                            sDto.setId(s.getId());
-                            sDto.setSpaceName(s.getName());
-                            sDto.setColor(s.getColor());
-                            sDto.setPrivate(s.isPrivate());
-                            return sDto;
-                        }).toList());
-            }
-
-            return dto;
-        });
-    }
+//    }
 }
