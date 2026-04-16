@@ -5,6 +5,7 @@ import com.backend.backend.dao.repositories.UserRepository;
 import com.backend.backend.dto.auth.AuthResponseDto;
 import com.backend.backend.dto.auth.AuthUserDto;
 import com.backend.backend.dto.auth.LoginRequestDto;
+import com.backend.backend.dto.auth.LogoutRequestDto;
 import com.backend.backend.dto.auth.MfaVerifyRequestDto;
 import com.backend.backend.dto.auth.RefreshTokenRequestDto;
 import com.backend.backend.dto.auth.RegisterRequestDto;
@@ -211,6 +212,18 @@ public class AuthManager implements IAuthService {
                 jwtService.generateAccessToken(user),
                 jwtService.generateRefreshToken(user)
         );
+    }
+
+    @Override
+    public void logout(LogoutRequestDto request) {
+        // JWT stateless: pas de session serveur a detruire.
+        // On valide simplement le format du refreshToken s'il est fourni.
+        if (request == null || isBlank(request.getRefreshToken())) {
+            return;
+        }
+
+        String refreshToken = request.getRefreshToken().trim();
+        jwtService.isValidRefreshToken(refreshToken);
     }
 
     private AuthResponseDto buildAuthSuccessResponse(User user) {
